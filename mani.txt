@@ -1,11 +1,10 @@
-hjgcvdghjvchjveduygvejumZNsjanbx
-jkxghfhjdgv
-ckjbsdajhgvc                                                                                                                                                  class Solution {
+import org.apache.commons.lang3.ArrayUtils;
+class Solution {
     public int countPalindromicSubsequence(String s) {
         int n = s.length();
         int l = 0, r = n - 1, sum = 0;
-        HashMap<Character, Integer> mp = new HashMap<>();
-        Set<Character> s = new Set<>();
+        Map<Character, Integer> mp = new HashMap<>();
+        Set<Character> set = new HashSet<>();
         while (l < r) {
             // if(!s.contains(s.charAt(l)) && !mp.contains(s.charAt(r)))
             // {
@@ -22,13 +21,25 @@ ckjbsdajhgvc                                                                    
                 mp.put(s.charAt(r), r);
                 r--;
             } 
-            else if (!s.contains(s.charAt(l)) && !mp.contains(s.charAt(r))) {
+            else if (!set.contains(s.charAt(l)) && !mp.containsKey(s.charAt(r))) {
                 char[] sub = s.substring(l, r + 1).toCharArray();
-                Set<Character> setsub = new HashSet<>(Arrays.asList(sub));
+                Character[] Arr = ArrayUtils.toObject(sub);
+                Set<Character> setsub = new HashSet<Character>(Arrays.asList(Arr));
                 sum = sum + setsub.size();
-                s.add(s.charAt(l));
+                set.add(s.charAt(l));
+                l++;
             }
-            
+            else if(mp.containsKey(s.charAt(r)))
+            {
+               char[] sub = s.substring(l, mp.get(s.charAt(r)) + 1).toCharArray(); 
+                Character[] Arr = ArrayUtils.toObject(sub);
+               Set<Character> setsub = new HashSet<Character>(Arrays.asList(Arr));
+                sum=sum+setsub.size();
+                mp.remove(s.charAt(r));
+            }
+
+
         }
+        return sum;
     }
-}                                                                                                                                                                  
+}
