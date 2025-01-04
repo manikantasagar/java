@@ -1,3 +1,34 @@
 hjgcvdghjvchjveduygvejumZNsjanbx
 jkxghfhjdgv
-ckjbsdajhgvc
+ckjbsdajhgvc                                                                                                                                                  class Solution {
+    public int countPalindromicSubsequence(String s) {
+        int n = s.length();
+        int l = 0, r = n - 1, sum = 0;
+        HashMap<Character, Integer> mp = new HashMap<>();
+        Set<Character> s = new Set<>();
+        while (l < r) {
+            // if(!s.contains(s.charAt(l)) && !mp.contains(s.charAt(r)))
+            // {
+            // if(s.charAt(l)==s.charAt(r))
+            // {
+            // char[] sub=s.substring(l,r+1).toCharArray();
+            // Set<Character> setsub=new HashSet<>( Arrays.asList(sub));
+            // sum=sum+set.size();
+
+            // }
+            // mp.put(s.charAt(r),r);
+            // }
+            if (s.charAt(l) != s.charAt(r)) {
+                mp.put(s.charAt(r), r);
+                r--;
+            } 
+            else if (!s.contains(s.charAt(l)) && !mp.contains(s.charAt(r))) {
+                char[] sub = s.substring(l, r + 1).toCharArray();
+                Set<Character> setsub = new HashSet<>(Arrays.asList(sub));
+                sum = sum + setsub.size();
+                s.add(s.charAt(l));
+            }
+            
+        }
+    }
+}                                                                                                                                                                  
